@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mousewheel slider</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box; overflow:hidden;}
+        li {list-style:none;}
+        .qq {position: relative; width:9000px; height:500px;}
+        .ww {position:absolute; top:5%; left:5%; width:100%; font-size:0;}
+        .ww li {display:inline-block; width:7%; height:500px; background-color: blueviolet; border:1px solid #000;}
+        .ww .zz {background-color: cornflowerblue;}
+    </style>
+</head>
+<body>
+    <div class="qq">
+        <ul class="ww">
+            <li class="zz">0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    const ul = document.querySelector('.ww');
+    const slide = document.querySelectorAll('.ww li');
+    const sWidth = slide[0].clientWidth;
+    let i = 1;
+    var time;
+
+    window.addEventListener('mousewheel', function(event){
+        var event = event.wheelDelta;
+        console.log(event);
+        if(time) {
+                window.clearTimeout(time);
+        }
+
+        time =window. setTimeout(function(){            
+            if(event <= -120 && i <= 6) {
+                ul.style.transition = 'transform 1s ease';
+                ul.style.transform = 'translateX(' + (-sWidth*i)+ 'px)';
+                i++;
+            } else if(event>= -120 && i > 0) {
+                i--;
+                ul.style.transition = 'transform 1s ease';
+                ul.style.transform = 'translateX(' + (-sWidth*i)+ 'px)';
+            }
+        }, 300);
+    });
+    
+    </script><!--연습용-->
+</body>
+</html>
